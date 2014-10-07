@@ -1,10 +1,5 @@
 *.png
 *.dot
-*.json
 *.pyc
 /venv
-build
-*dist*
-*egg*
-*#*
-*~*
+/bin
