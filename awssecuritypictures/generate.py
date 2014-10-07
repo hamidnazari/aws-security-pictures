@@ -758,11 +758,12 @@ def generateGroups(layer1, layer2, fh):
 
 ###############################################################################
 @contextmanager
-def generateGraph(fh, title=None):
+def generateGraph(fh, **kwargs):
     fh.write("digraph g {\n")
+    label = kwargs.get('label', None)
 
-    if title:
-        fh.write('labelloc="t"; label="%s";' % title)
+    if label:
+        fh.write('labelloc="t"; label="%s";' % label)
 
     fh.write('node [margin=0 width=0.5 shape="plaintext"]\n')
     yield
@@ -834,9 +835,9 @@ def main():
         displayRdsList(fh)
         sys.exit(0)
 
-    title = "%s\t%s" % (args.elb or args.ec2, args.rds or "")
+    label = "%s\t%s" % (args.elb or args.ec2, args.rds or "")
 
-    with generateGraph(fh, title.strip()):
+    with generateGraph(fh, label=label.strip()):
         routetable_data = None
         ec2_instances = [args.ec2]
 
