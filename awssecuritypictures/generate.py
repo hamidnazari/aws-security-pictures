@@ -588,9 +588,15 @@ def generateRouters(routetable, fh, **kwargs):
 ###############################################################################
 def parseArgs():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--profile',
-                        default=None,
-                        help="AWS CLI profile to be used")
+
+    parser.add_argument('-v', '--verbose',
+                        default=False,
+                        action='store_true',
+                        help="Print some details (default: false)")
+    parser.add_argument('-b', '--bypass-cache',
+                        default=False,
+                        action="store_true",
+                        help="Invalidate cache and re-pull the data")
     parser.add_argument('--elb',
                         default=None,
                         help="Which ELB to examine")
@@ -600,20 +606,18 @@ def parseArgs():
     parser.add_argument('--rds',
                         default=None,
                         help="Which RDS to attach")
-    parser.add_argument('-b', '--bypass-cache',
-                        default=False,
-                        action="store_true",
-                        help="Invalidate cache and re-pull the data.")
+    parser.add_argument('-p', '--profile',
+                        default=None,
+                        help="AWS CLI profile to be used")
+    parser.add_argument('-t', '--title',
+                        default=None,
+                        help="Title to be printed on top of the diagram.")
     parser.add_argument('-o', '--output',
                         default=sys.stdout,
                         type=argparse.FileType('w'),
-                        help="Which file to output to [stdout]")
-    parser.add_argument('-v', '--verbose',
-                        default=False,
-                        action='store_true',
-                        help="Print some details")
-    args = parser.parse_args()
-    return args
+                        help="Which file to output to (default: stdout)")
+
+    return parser.parse_args()
 
 
 ###############################################################################
@@ -835,9 +839,9 @@ def main():
         displayRdsList(fh)
         sys.exit(0)
 
-    label = "%s\t%s" % (args.elb or args.ec2, args.rds or "")
+    title = args.title or "%s\t%s" % (args.elb or args.ec2, args.rds or "")
 
-    with generateGraph(fh, label=label.strip()):
+    with generateGraph(fh, label=title.strip()):
         routetable_data = None
         ec2_instances = [args.ec2]
 
