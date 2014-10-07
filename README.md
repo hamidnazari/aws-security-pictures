@@ -26,7 +26,7 @@ How to Contribute
 Please make sure the following command exits successfully before pushing your
 code.
 
-	$ flake8 awssecuritypictures --ignore=E501
+	$ flake8 --ignore=E501
 	$ python ./setup.py install
 
 
@@ -35,19 +35,19 @@ How to run
 
 Generate a picture of an ELB and attached EC2s,
 
-	$ ./awssecuritypictures/generate.py --elb ELBNAME -o output.dot
+	$ ./generate.py --elb ELBNAME -o output.dot
 
 Generate a picture of an EC2,
 
-	$ ./awssecuritypictures/generate.py --ec2 EC2ID -o output.dot
+	$ ./generate.py --ec2 EC2ID -o output.dot
 
 Attach and RDS to a picture of an ELB and attached EC2s, or just an EC2,
 
-	$ ./awssecuritypictures/generate.py --elb ELBNAME --rds RDSID -o output.dot
+	$ ./generate.py --elb ELBNAME --rds RDSID -o output.dot
 
 or
 
-	$ ./awssecuritypictures/generate.py --ec2 EC2ID --rds RDSID -o output.dot
+	$ ./generate.py --ec2 EC2ID --rds RDSID -o output.dot
 
 The above generate the dot files required. In order to see the output image,
 
@@ -55,19 +55,19 @@ The above generate the dot files required. In order to see the output image,
 
 Generate a list of all ELBs and EC2s,
 
-	$ ./awssecuritypictures/generate.py
+	$ ./generate.py
 
 Make use of AWS CLI profiles,
 
-	$ ./awssecuritypictures/generate.py --profile PROFILENAME
+	$ ./generate.py --profile PROFILENAME
 
 	or
 
-	$ ./awssecuritypictures/generate.py -p PROFILENAME
+	$ ./generate.py -p PROFILENAME
 
 More handy arugments can be found here,
 
-	$ ./awssecuritypictures/generate.py -h
+	$ ./generate.py -h
 
 It is recommended to utiliase a runscript provided that executes above commands
 in one go. More info,
