@@ -41,7 +41,7 @@ or
 Please make sure the following command exits successfully before pushing your
 code.
 
-	$ flake8 --ignore=E501
+	$ flake8 setup.py bin --ignore=E501
 	$ python ./setup.py install
 
 
