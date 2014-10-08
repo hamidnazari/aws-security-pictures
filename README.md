@@ -1,25 +1,40 @@
 [![Build Status](https://travis-ci.org/daniellawrence/aws-security-pictures.svg?branch=master)](https://travis-ci.org/daniellawrence/aws-security-pictures)
 
 
-AWS Security Pictures
----------------------
+# AWS Security Pictures
 
 Generate detailed images of AWS infrastructure for security reviews.
 
+# Dependencies
 
-How to Install
---------------
+AWSSP depends on `graphviz` and `awscli`.
 
-    $ sudo apt-get install graphviz python-pip python-virtualenv
+On Debian/Ubuntu:
+
+	$ sudo apt-get install graphviz python-pip
+
+On Fedora/CentOS/RedHad:
+
+	$ sudo yum install graphviz python-pip
+
+On Mac:
+
+	$ brew install graphviz
+	$ sudo easy_install pip
+
+
+# How to Install
+
 	$ git clone https://github.com/daniellawrence/aws-security-pictures
+	$ python ./setup.py install
+
+or
+
 	$ cd aws-security-pictures
-    $ virtualenv venv
-	$ source venv/bin/activate
 	$ pip install -r requirements.txt
 
 
-How to Contribute
------------------
+# How to Contribute
 
 	$ pip install -r requirements-dev.txt
 
@@ -30,8 +45,18 @@ code.
 	$ python ./setup.py install
 
 
-How to run
-----------
+# How to run
+
+It is recommended to utiliase `awssp` command that executes below commands
+in one go. More info,
+
+	$ awssp -h
+
+Example:
+
+	$ awssp -p PROFILENAME -l ELBNAME -r RDSID
+
+## generate.py
 
 Generate a picture of an ELB and attached EC2s,
 
@@ -69,18 +94,8 @@ More handy arugments can be found here,
 
 	$ generate.py -h
 
-It is recommended to utiliase a runscript provided that executes above commands
-in one go. More info,
 
-	$ awssp -h
-
-Example:
-
-	$ awssp -p PROFILENAME -l ELBNAME -r RDSID
-
-
-Experiments
------------
+# Experiments
 
 Generate all rules within a subnet for review,
 
@@ -91,8 +106,7 @@ Generate the relationships of all the items with a account,
 	$ experiments/relationships.py > x.dot && fdp -Tpng x.dot >x.png && eog x.png
 
 
-Examples
---------
+# Examples
 
 ELB pointing to a single instances.
 
