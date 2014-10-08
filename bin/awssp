@@ -37,7 +37,7 @@ while getopts 'qhvbp:e:l:r:' flag; do
 done
 
 if [[ -n $OUTPUT ]]; then
-    mkdir $OUTPUT_DIR
+    mkdir -p $OUTPUT_DIR
     OUTPUT="$OUTPUT_DIR/$OUTPUT"
     execute $DIR/generate.py $VERBOSE $BYPASS_CACHE $ELB $EC2 $RDS $PROFILE -o $OUTPUT.dot
     execute dot -T png $OUTPUT.dot -o $OUTPUT.png $VERBOSE
