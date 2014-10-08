@@ -1,5 +1,8 @@
 *.png
 *.dot
 *.pyc
+*.egg-info
 /venv
-/bin
+/output
+/build
+/dist

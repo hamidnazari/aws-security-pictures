@@ -21,12 +21,12 @@ def acl_rules(acl):
         portrange = "TCP/UDP/ICMP"
         if "PortRange" in e:
             protocol = P_MAP[e['Protocol']]
-            portrange = "%d-%d/%s" %(
+            portrange = "%d-%d/%s" % (
                 e['PortRange']['From'], e['PortRange']['To'], protocol
             )
-        rule = "%s %s %s %s" % (
-            e['RuleNumber'], e['RuleAction'], e['CidrBlock'], portrange
-        )
+        # rule = "%s %s %s %s" % (
+        #     e['RuleNumber'], e['RuleAction'], e['CidrBlock'], portrange
+        # )
         rule_color = "red"
         if e['RuleAction'] == "allow":
             rule_color = "green"
@@ -44,7 +44,7 @@ def acl_rules(acl):
         </tr>
         """ % (rule_color, direction,
                e['RuleNumber'], e['CidrBlock'], portrange
-        )
+               )
 
     return rules + "</table>"
 
@@ -108,8 +108,8 @@ def main():
         aws = json.load(jsonfile)
 
     print "digraph G {"
-    #print "overlap = false;"
-    #print "splines = true;"
+    # print "overlap = false;"
+    # print "splines = true;"
     print 'node [shape="plaintext"]'
     print """
     splines=true;

@@ -4,8 +4,13 @@
 ##################################################################
 set -e
 
+OUTPUT_DIR="output"
+OUTPUT=""
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+
 usage() {
-    echo "usage: $0 [-v] [-b] [-l ELBNAME] [-e EC2ID] [-r RDSID] [-p PROFILE] [-q]"
+    echo "usage: ${0##*/} [-v] [-b] [-l ELBNAME] [-e EC2ID] [-r RDSID] [-p PROFILE] [-q]"
 }
 
 execute() {
@@ -17,11 +22,6 @@ execute() {
     fi
 }
 
-OUTPUT=""
-
-# current dir
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 while getopts 'qhvbp:e:l:r:' flag; do
     case $flag in
         v) VERBOSE='-v';;
@@ -31,14 +31,14 @@ while getopts 'qhvbp:e:l:r:' flag; do
         e) EC2="--ec2 $OPTARG"; OUTPUT=$OPTARG;;
         r) RDS="--rds $OPTARG";;
         q) exec 1>/dev/null 2>/dev/null;;
-        h|help) usage; exit 0;;
+        h) usage; exit 0;;
         *) usage; exit 64;;
     esac
 done
 
 if [[ -n $OUTPUT ]]; then
-    mkdir bin
-    OUTPUT="bin/$OUTPUT"
+    mkdir $OUTPUT_DIR
+    OUTPUT="$OUTPUT_DIR/$OUTPUT"
     execute $DIR/generate.py $VERBOSE $BYPASS_CACHE $ELB $EC2 $RDS $PROFILE -o $OUTPUT.dot
     execute dot -T png $OUTPUT.dot -o $OUTPUT.png $VERBOSE
 

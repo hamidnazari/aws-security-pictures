@@ -4,7 +4,7 @@
 AWS Security Pictures
 ---------------------
 
-Generate detailed images of aws deployments for security reviews.
+Generate detailed images of AWS infrastructure for security reviews.
 
 
 How to Install
@@ -35,19 +35,19 @@ How to run
 
 Generate a picture of an ELB and attached EC2s,
 
-	$ ./generate.py --elb ELBNAME -o output.dot
+	$ generate.py --elb ELBNAME -o output.dot
 
 Generate a picture of an EC2,
 
-	$ ./generate.py --ec2 EC2ID -o output.dot
+	$ generate.py --ec2 EC2ID -o output.dot
 
 Attach and RDS to a picture of an ELB and attached EC2s, or just an EC2,
 
-	$ ./generate.py --elb ELBNAME --rds RDSID -o output.dot
+	$ generate.py --elb ELBNAME --rds RDSID -o output.dot
 
 or
 
-	$ ./generate.py --ec2 EC2ID --rds RDSID -o output.dot
+	$ generate.py --ec2 EC2ID --rds RDSID -o output.dot
 
 The above generate the dot files required. In order to see the output image,
 
@@ -55,28 +55,28 @@ The above generate the dot files required. In order to see the output image,
 
 Generate a list of all ELBs and EC2s,
 
-	$ ./generate.py
+	$ generate.py
 
 Make use of AWS CLI profiles,
 
-	$ ./generate.py --profile PROFILENAME
+	$ generate.py --profile PROFILENAME
 
 	or
 
-	$ ./generate.py -p PROFILENAME
+	$ generate.py -p PROFILENAME
 
 More handy arugments can be found here,
 
-	$ ./generate.py -h
+	$ generate.py -h
 
 It is recommended to utiliase a runscript provided that executes above commands
 in one go. More info,
 
-	$ ./run -h
+	$ awssp -h
 
 Example:
 
-	$ ./run -p PROFILENAME -l ELBNAME -r RDSID
+	$ awssp -p PROFILENAME -l ELBNAME -r RDSID
 
 
 Experiments
@@ -84,11 +84,11 @@ Experiments
 
 Generate all rules within a subnet for review,
 
-	$ ./experiments/firewall_review.py > x.dot && fdp -Tpng x.dot >x.png && eog x.png
+	$ experiments/firewall_review.py > x.dot && fdp -Tpng x.dot >x.png && eog x.png
 
 Generate the relationships of all the items with a account,
 
-	$ ./experiments/relationships.py > x.dot && fdp -Tpng x.dot >x.png && eog x.png
+	$ experiments/relationships.py > x.dot && fdp -Tpng x.dot >x.png && eog x.png
 
 
 Examples
